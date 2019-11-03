@@ -72,5 +72,6 @@ public class DemoApplication implements CommandLineRunner //to run code in appli
         userRepository.save(new User("Kosta", "Kosta", 10, UserStatus.LOYAL));
         userRepository.save(new User("Tsiker", "TsikerTsiker", 20, UserStatus.GOLD));
         userRepository.save(new User("Fredy", "Kroyker", 200, UserStatus.PLATINUM));
+        userRepository.save(new User("Mitsos", "Kitsos", 30, UserStatus.LOYAL));
     }
 }
