@@ -5,6 +5,7 @@ import com.example.demo.pojos.UserResponse;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,5 +21,10 @@ public class UserController {
         List<UserResponse> users = service.getAllUsers();
         AllUsersResponse response = new AllUsersResponse(users);
         return response;
+    }
+
+    @GetMapping("/userByStatus/{status}")
+    public AllUsersResponse getUsersByStatus(@PathVariable String status) {
+        return new AllUsersResponse(service.getUsersByStatus(status));
     }
 }

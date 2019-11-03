@@ -19,7 +19,7 @@ public class UsersMapper {
         return users;
     }
 
-    private UserResponse mapUserToUserResponse(User user) {
+    public UserResponse mapUserToUserResponse(User user) {
         return new UserResponse(
                         user.getId(),
                         user.getFirstName(),
