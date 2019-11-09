@@ -1,8 +1,11 @@
 package com.example.demo.services;
 
 import com.example.demo.TourMapper;
+import com.example.demo.pojos.Error;
+import com.example.demo.pojos.GenericResponse;
 import com.example.demo.pojos.Tour;
 import com.example.demo.pojos.TourResponse;
+import com.example.demo.repositories.TourPackageRepository;
 import com.example.demo.repositories.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ public class TourService {
 
     @Autowired
     private TourRepository repository;
+
+    @Autowired
+    private TourPackageRepository tourPackageRepository;
 
     public List<TourResponse> getAllTours() {
         Iterable<Tour> retrievedTours = repository.findAll();
@@ -55,16 +61,21 @@ public class TourService {
         return tours;
     }
 
-    public List<TourResponse> getToursByCriteria(String criteria, Long criteriaId) {
+    public GenericResponse<List<TourResponse>> getToursByCriteria(String criteria, Long criteriaId) {
         Iterable<Tour> tours = repository.findAll();
         List<TourResponse> toursToReturn = new ArrayList<>();
-        if(criteria.equals("tourPackage")) {
-            for(Tour tour : tours) {
-                if(tour.getTourPackage().getId() == criteriaId) {
+
+        if (criteria.equals("tourPackage")) {
+
+            if (!tourPackageRepository.findById(criteriaId).isPresent())
+                return new GenericResponse<>(new Error(0, "Wrong Input", "Tourpackage with id " + criteriaId + " does not exist"));
+
+            for (Tour tour : tours) {
+                if (tour.getTourPackage().getId() == criteriaId) {
                     toursToReturn.add(mapper.mapTourResponseFromTour(tour));
                 }
             }
         }
-        return toursToReturn;
+        return new GenericResponse<>(toursToReturn);
     }
 }
