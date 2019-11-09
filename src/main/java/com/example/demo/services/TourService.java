@@ -54,4 +54,17 @@ public class TourService {
 
         return tours;
     }
+
+    public List<TourResponse> getToursByCriteria(String criteria, Long criteriaId) {
+        Iterable<Tour> tours = repository.findAll();
+        List<TourResponse> toursToReturn = new ArrayList<>();
+        if(criteria.equals("tourPackage")) {
+            for(Tour tour : tours) {
+                if(tour.getTourPackage().getId() == criteriaId) {
+                    toursToReturn.add(mapper.mapTourResponseFromTour(tour));
+                }
+            }
+        }
+        return toursToReturn;
+    }
 }
