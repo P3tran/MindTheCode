@@ -1,5 +1,7 @@
 package com.example.demo.pojos;
 
+import java.util.Objects;
+
 public class UserResponse {
 
     private long id;
@@ -55,4 +57,5 @@ public class UserResponse {
     public void setStatus(String status) {
         this.status = status;
     }
+    
 }
