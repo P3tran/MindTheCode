@@ -29,6 +29,16 @@ public class Tour {
         this.longDescription = longDescription;
     }
 
+    public Tour(long id, int price, int discount, String title, String shortDescription, String longDescription, TourPackage tourPackage) {
+        this.id = id;
+        this.price = price;
+        this.discount = discount;
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.tourPackage = tourPackage;
+    }
+
     public long getId() {
         return id;
     }

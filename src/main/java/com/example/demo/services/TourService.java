@@ -16,21 +16,26 @@ import java.util.List;
 @Service
 public class TourService {
 
-    @Autowired
     private TourMapper mapper;
 
-    @Autowired
     private TourRepository repository;
 
-    @Autowired
     private TourPackageRepository tourPackageRepository;
+
+    public TourService(TourMapper mapper, TourRepository repository, TourPackageRepository tourPackageRepository) {
+        this.mapper = mapper;
+        this.repository = repository;
+        this.tourPackageRepository = tourPackageRepository;
+    }
 
     public List<TourResponse> getAllTours() {
         Iterable<Tour> retrievedTours = repository.findAll();
         List<TourResponse> tours = new ArrayList<>();
 
         for (Tour tour : retrievedTours) {
-            tours.add(mapper.mapTourResponseFromTour(tour));
+            TourResponse newTour = mapper.mapTourResponseFromTour(tour);
+            newTour.setFinalPrice(600000);
+            tours.add(newTour);
         }
 
         return tours;
