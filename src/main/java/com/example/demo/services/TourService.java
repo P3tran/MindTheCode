@@ -43,7 +43,7 @@ public class TourService {
         Iterable<Tour> retrievedTours = repository.findAll();
         List<TourResponse> tours = new ArrayList<>();
         for (Tour tour : retrievedTours) {
-            if (tour.getTourPackage().getId() == tourPackageId) {
+            if (tour.getTourPackage() !=null && tour.getTourPackage().getId() == tourPackageId) {
                 tours.add(mapper.mapTourResponseFromTour(tour));
             }
         }

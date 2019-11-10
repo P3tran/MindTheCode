@@ -30,8 +30,22 @@ public class TourController {
     }
 
     @GetMapping("/getToursByPackageId/{tourPackageId}")
-    public GetAllToursResponse getToursByPackageId(@PathVariable Long tourPackageId) {
-        return new GetAllToursResponse(service.getToursByPackageId(tourPackageId));
+    public ResponseEntity getToursByPackageId(@PathVariable Long tourPackageId) {
+        try {
+            return new  ResponseEntity(
+                    new GetAllToursResponse(service.getToursByPackageId(tourPackageId)),
+                    null,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return new  ResponseEntity(
+                     new Error(0, "Error" ,"Something went wrong please try again"),
+                    null,
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     @GetMapping("/expensiveTours")
