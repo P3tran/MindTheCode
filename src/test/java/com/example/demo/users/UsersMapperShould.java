@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.users;
 
+import com.example.demo.UsersMapper;
 import com.example.demo.pojos.User;
 import com.example.demo.pojos.UserResponse;
 import com.example.demo.pojos.UserStatus;

@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.tours;
 
+import com.example.demo.TourMapper;
 import com.example.demo.pojos.Tour;
 import com.example.demo.pojos.TourPackage;
 import com.example.demo.pojos.TourResponse;
