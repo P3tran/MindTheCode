@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.InvalidUserStatusException;
 import com.example.demo.UsersMapper;
 import com.example.demo.pojos.User;
 import com.example.demo.pojos.UserResponse;
@@ -23,9 +24,16 @@ public class UserService {
         return mapper.mapUsers(repository.findAll());
     }
 
-    public List<UserResponse> getUsersByStatus(String status) {
-        Iterable<User> retrievedUsers = repository.findAll();
+    public List<UserResponse> getUsersByStatus(String status) throws InvalidUserStatusException{
+        if (!status.equals("new") &&
+                !status.equals("gold") &&
+                !status.equals("platinum") &&
+                !status.equals("loyal"))
+            throw new InvalidUserStatusException();
+
+            Iterable<User> retrievedUsers = repository.findAll();
         List<UserResponse> users = new ArrayList<>();
+
         for (User user : retrievedUsers) {
             if (String.valueOf(user.getStatus()).equalsIgnoreCase(status)) {
                 UserResponse userToAdd = mapper.mapUserToUserResponse(user);
