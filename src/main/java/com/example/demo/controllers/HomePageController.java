@@ -23,7 +23,7 @@ public class HomePageController {
     @Autowired
     HomeInteractor interactor;
 
-    @GetMapping("home")
+    @GetMapping("home-page")
     public ResponseEntity getHomePage() {
         ResponseEntity response = new ResponseEntity(
                 interactor.getHomePage(),
