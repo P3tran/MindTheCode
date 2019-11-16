@@ -19,17 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("tour-office/")
 public class TourController {
 
     @Autowired
     private TourService service;
 
-    @GetMapping("/allTours")
+    @GetMapping("allTours")
     public GetAllToursResponse getAllTours() {
         return new GetAllToursResponse(service.getAllTours());
     }
 
-    @GetMapping("/getToursByPackageId/{tourPackageId}")
+    @GetMapping("getToursByPackageId/{tourPackageId}")
     public ResponseEntity getToursByPackageId(@PathVariable Long tourPackageId) {
         try {
             return new  ResponseEntity(
@@ -48,12 +49,12 @@ public class TourController {
         }
     }
 
-    @GetMapping("/expensiveTours")
+    @GetMapping("expensiveTours")
     public GetAllToursResponse getExpensiveTours() {
         return new GetAllToursResponse(service.getExpensiveTours());
     }
 
-    @GetMapping("/getToursByCriteria/{criteria}/{criteriaId}")
+    @GetMapping("getToursByCriteria/{criteria}/{criteriaId}")
     public ResponseEntity getToursByCriteria(@PathVariable String criteria,
                                                   @PathVariable Long criteriaId) {
         if(!criteria.equals("tourPackage"))
