@@ -28,7 +28,7 @@ public class TourService {
         this.tourPackageRepository = tourPackageRepository;
     }
 
-    public List<TourResponse> getAllTours() {
+    public GenericResponse<List<TourResponse>> getAllTours() {
         Iterable<Tour> retrievedTours = repository.findAll();
         List<TourResponse> tours = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class TourService {
             tours.add(newTour);
         }
 
-        return tours;
+        return new GenericResponse(tours);
 /*        retrievedTours.forEach((tour)-> {
 
         });*/
@@ -56,7 +56,7 @@ public class TourService {
     }
 
     public List<TourResponse> getExpensiveTours() {
-        List<TourResponse> mappedTours = getAllTours();
+        List<TourResponse> mappedTours = getAllTours().getData();
         List<TourResponse> tours = new ArrayList<>();
         for (TourResponse tour : mappedTours) {
             if (tour.getFinalPrice() > 500)

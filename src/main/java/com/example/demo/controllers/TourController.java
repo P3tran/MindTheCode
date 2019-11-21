@@ -22,12 +22,19 @@ import java.util.List;
 @RequestMapping("tour-office/")
 public class TourController {
 
-    @Autowired
     private TourService service;
 
+    public TourController(TourService service) {
+        this.service = service;
+    }
+
     @GetMapping("allTours")
-    public GetAllToursResponse getAllTours() {
-        return new GetAllToursResponse(service.getAllTours());
+    public ResponseEntity getAllTours() {
+        GenericResponse<List<TourResponse>> response = service.getAllTours();
+        if(response.getError() != null)
+            return new ResponseEntity(response.getError(), null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return new ResponseEntity(new GetAllToursResponse(response.getData()),null, HttpStatus.OK);
     }
 
     @GetMapping("getToursByPackageId/{tourPackageId}")

@@ -69,7 +69,7 @@ public class TourServiceShould {
     @Test
     @Ignore
     public void returnsListOfTourResponse() {
-        List<TourResponse> output = service.getAllTours();
+        List<TourResponse> output = service.getAllTours().getData();
         Assert.assertEquals(2, output.size());
         List<TourResponse> expectedList = new ArrayList<>();
         expectedList.add(tourResponseFromMaper);
